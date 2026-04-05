@@ -4,915 +4,628 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudyInIreland – Book Your Exam</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
       :root {
         --emerald: #1a5c3a;
         --emerald-light: #2d8a58;
         --emerald-pale: #e8f5ee;
-        --gold: #c9972b;
-        --gold-light: #f0c65e;
         --ink: #111827;
         --mist: #f4f7f5;
         --white: #ffffff;
         --gray: #6b7280;
         --gray-light: #e5e7eb;
-        --red: #dc2626;
-        --shadow: 0 4px 24px rgba(26, 92, 58, 0.1);
-        --shadow-lg: 0 12px 48px rgba(26, 92, 58, 0.16);
+        --shadow: 0 4px 24px rgba(26, 92, 58, 0.08);
+        --shadow-lg: 0 12px 48px rgba(26, 92, 58, 0.12);
       }
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: "DM Sans", sans-serif;
-        background: var(--mist);
-        color: var(--ink);
-      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { font-family: "Figtree", sans-serif; background: var(--mist); color: var(--ink); line-height: 1.5; }
 
-      /* ── HERO ── */
-      .hero {
-        background: linear-gradient(135deg, var(--emerald) 0%, #0f3d26 100%);
-        padding: 3.5rem 5% 3rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      }
-      .hero-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        position: relative;
-        width: 100%;
-      }
-      .hero-text {
-        width: 90%;
-        max-width: 860px;
-      }
-      .hero-eyebrow {
-        display: inline-block;
-        background: var(--gold);
-        color: var(--white);
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        padding: 4px 12px;
-        border-radius: 20px;
-        margin-bottom: 1rem;
-      }
-      .hero-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.8rem, 4vw, 2.6rem);
-        color: var(--white);
-        line-height: 1.2;
-        margin-bottom: 1rem;
-      }
-      .hero-title em {
-        color: var(--gold-light);
-        font-style: normal;
-      }
-      .hero-checks {
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem 2rem;
-        margin-bottom: 1.5rem;
-      }
-      .hero-checks li {
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 0.92rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .hero-checks li::before {
-        content: "✓";
-        color: var(--gold-light);
-        font-weight: 700;
-        font-size: 1rem;
-      }
-      .hero-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: var(--gold);
-        color: var(--white);
-        font-weight: 700;
-        font-size: 0.95rem;
-        padding: 0.75rem 1.75rem;
-        border-radius: 8px;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-      }
-      .hero-cta:hover {
-        background: #b5841f;
-        transform: translateY(-2px);
-      }
+      .section { margin: 0 auto; padding: 4rem 2%; max-width: 1400px; }
+      .section-header { margin-bottom: 2.5rem; text-align: center; }
+      .section-title { font-size: 2.25rem; color: var(--emerald); font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+      .section-sub { font-size: 0.85rem; color: var(--emerald); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 0.5rem; }
 
-      /* ── SECTION ── */
-      .section {
-        margin: 0 auto;
-        padding: 3rem 5%;
-      }
-      .section-header {
-        margin-bottom: 1.5rem;
-      }
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: 1.65rem;
-        color: var(--ink);
-        font-weight: 700;
-        margin-bottom: 0.25rem;
-      }
-      .section-sub {
-        font-size: 0.82rem;
-        color: var(--gray);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-weight: 600;
-      }
-
-      /* ── GRID ── */
       .voucher-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 1.25rem;
       }
 
-      /* ── CARD ── */
+      /* Center single card */
+      .voucher-grid.single-centered {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .voucher-grid.single-centered .voucher-card {
+        grid-column: 2;
+      }
+
       .voucher-card {
         background: var(--white);
-        border-radius: 14px;
+        border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--shadow);
         display: flex;
         flex-direction: column;
-        transition:
-          box-shadow 0.2s,
-          transform 0.2s;
-        border: 1.5px solid transparent;
+        transition: box-shadow 0.3s, transform 0.3s;
+        border: 1px solid var(--gray-light);
       }
       .voucher-card:hover {
         box-shadow: var(--shadow-lg);
-        transform: translateY(-3px);
+        transform: translateY(-4px);
         border-color: var(--emerald-pale);
       }
 
-      .card-top {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1.1rem 1.1rem 0.9rem;
-        position: relative;
-      }
-      .card-img {
-        width: 68px;
-        height: 68px;
-        border-radius: 10px;
-        overflow: hidden;
-        background: var(--emerald);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Playfair Display", serif;
-        color: var(--white);
-        font-size: 1.1rem;
-        font-weight: 700;
-        flex-shrink: 0;
-      }
-      .card-img.duolingo {
-        background: linear-gradient(135deg, #58cc02, #3eae00);
-      }
-      .card-img.gre {
-        background: linear-gradient(135deg, #1a3d6b, #0c2240);
-      }
-      .card-img.toefl {
-        background: linear-gradient(135deg, #1a3d6b, #0c2240);
-      }
-      .card-img.pte {
-        background: linear-gradient(135deg, #003da5, #002575);
-      }
-      .card-img.ielts {
-        background: linear-gradient(135deg, #d62828, #9b1c1c);
-      }
-      .card-img.sat {
-        background: linear-gradient(135deg, #7c3aed, #5b21b6);
-      }
+      .card-top { padding: 1.4rem 1.4rem 0.6rem; }
+      .card-name { font-weight: 800; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.35rem; line-height: 1.2; }
+      .card-desc-top { font-size: 0.8rem; color: var(--gray); font-weight: 400; line-height: 1.4; }
 
-      .discount-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: var(--red);
-        color: var(--white);
-        font-size: 0.7rem;
-        font-weight: 700;
-        padding: 3px 8px;
-        border-radius: 20px;
+      .card-body { padding: 0.75rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+
+      /* Price rows */
+      .price-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+      .price-table tr { border-bottom: 1px solid var(--gray-light); }
+      .price-table tr:last-child { border-bottom: none; }
+      .price-table td { padding: 0.45rem 0; font-size: 0.85rem; }
+      .price-table td:first-child { color: var(--gray); font-weight: 500; }
+      .price-table td:last-child { text-align: right; font-weight: 700; color: var(--emerald); }
+
+      /* Single price */
+      .price-single { font-size: 1.35rem; font-weight: 800; color: var(--emerald); letter-spacing: -0.01em; margin-bottom: 0.15rem; }
+      .price-note { font-size: 0.75rem; color: var(--gray); font-weight: 500; margin-bottom: 1rem; }
+
+      /* Code badge */
+      .code-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--emerald-pale);
+        border: 1px dashed var(--emerald-light);
+        border-radius: 8px;
+        padding: 0.55rem 0.8rem;
+        margin-bottom: 1rem;
       }
-      .card-name {
-        font-weight: 700;
-        font-size: 0.97rem;
-        color: var(--ink);
-        margin-bottom: 0.15rem;
-        line-height: 1.3;
-      }
-      .card-type {
+      .code-badge-label { font-size: 0.72rem; color: var(--emerald); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+      .code-badge-sep { color: var(--emerald-light); font-size: 0.8rem; }
+      .code-badge-value { font-size: 0.9rem; font-weight: 800; color: var(--emerald); letter-spacing: 0.1em; font-family: "Courier New", monospace; }
+
+      .card-desc { color: var(--gray); font-size: 0.88rem; margin-bottom: 1.1rem; line-height: 1.5; flex: 1; }
+      .card-spacer { flex: 1; }
+
+      /* Official website link */
+      .official-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
         font-size: 0.78rem;
-        color: var(--gray);
-      }
-      .card-body {
-        padding: 0 1.1rem 1.1rem;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-      .card-prices {
-        display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-        margin-bottom: 0.3rem;
-      }
-      .price-mrp {
-        font-size: 0.82rem;
-        color: var(--gray);
-        text-decoration: line-through;
-      }
-      .price-gst {
-        font-size: 0.72rem;
-        color: var(--gray);
-      }
-      .price-our {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: var(--emerald);
-      }
-      .price-save {
-        font-size: 0.8rem;
-        color: #059669;
         font-weight: 600;
-        margin-bottom: 0.9rem;
+        color: var(--gray);
+        text-decoration: none;
+        margin-bottom: 1rem;
+        transition: color 0.2s;
+        width: fit-content;
       }
+      .official-link:hover { color: var(--emerald); }
+      .official-link svg { flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+      .official-link:hover svg { opacity: 1; }
+
       .card-btn {
-        margin-top: auto;
         display: block;
         text-align: center;
         background: var(--emerald);
         color: var(--white);
         font-weight: 700;
-        font-size: 0.88rem;
-        padding: 0.65rem 1rem;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-      }
-      .card-btn:hover {
-        background: var(--emerald-light);
-        transform: translateY(-1px);
-      }
-      .card-btn.secondary {
-        background: var(--white);
-        color: var(--emerald);
-        border: 2px solid var(--emerald);
-      }
-      .card-btn.secondary:hover {
-        background: var(--emerald-pale);
-      }
-
-      /* ── DIVIDER ── */
-      .section-divider {
-        border: none;
-        border-top: 1.5px solid var(--gray-light);
-        margin: 0 5%;
-      }
-
-      /* ── MODAL OVERLAY ── */
-      .modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.55);
-        backdrop-filter: blur(4px);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-      }
-      .modal-overlay.active {
-        display: flex;
-      }
-
-      .modal {
-        background: var(--white);
-        border-radius: 20px;
-        width: 100%;
-        max-width: 480px;
-        padding: 2rem;
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
-        position: relative;
-        animation: slideUp 0.3s ease;
-      }
-      @keyframes slideUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: var(--gray-light);
-        border: none;
-        cursor: pointer;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        font-size: 1rem;
-        color: var(--gray);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-      }
-      .modal-close:hover {
-        background: var(--emerald-pale);
-        color: var(--emerald);
-      }
-
-      .modal-eyebrow {
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--emerald);
-        margin-bottom: 0.4rem;
-      }
-      .modal-title {
-        font-family: "Playfair Display", serif;
-        font-size: 1.35rem;
-        color: var(--ink);
-        font-weight: 700;
-        margin-bottom: 0.25rem;
-      }
-      .modal-exam-tag {
-        display: inline-block;
-        background: var(--emerald-pale);
-        color: var(--emerald);
-        font-size: 0.8rem;
-        font-weight: 700;
-        padding: 4px 14px;
-        border-radius: 20px;
-        margin-bottom: 1.25rem;
-      }
-
-      .form-grid {
-        display: grid;
-        gap: 0.9rem;
-      }
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-      .form-label {
-        font-size: 0.82rem;
-        font-weight: 600;
-        color: var(--ink);
-      }
-      .form-input {
-        padding: 0.65rem 0.9rem;
-        border: 1.5px solid var(--gray-light);
-        border-radius: 8px;
-        font-family: "DM Sans", sans-serif;
-        font-size: 0.92rem;
-        color: var(--ink);
-        transition:
-          border-color 0.2s,
-          box-shadow 0.2s;
-        background: var(--white);
-      }
-      .form-input:focus {
-        outline: none;
-        border-color: var(--emerald);
-        box-shadow: 0 0 0 3px rgba(26, 92, 58, 0.1);
-      }
-      .form-input.readonly {
-        background: var(--emerald-pale);
-        color: var(--emerald);
-        font-weight: 600;
-        cursor: default;
-      }
-
-      .form-submit {
-        background: var(--emerald);
-        color: var(--white);
-        font-family: "DM Sans", sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+        padding: 0.85rem 1rem;
         border-radius: 10px;
         border: none;
         cursor: pointer;
         width: 100%;
-        margin-top: 0.5rem;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-      }
-      .form-submit:hover {
-        background: var(--emerald-light);
-        transform: translateY(-1px);
-      }
-
-      /* ── SUCCESS ── */
-      .success-state {
-        text-align: center;
-        padding: 1rem 0;
-      }
-      .success-icon {
-        font-size: 3rem;
-        margin-bottom: 0.75rem;
-      }
-      .success-title {
-        font-family: "Playfair Display", serif;
-        font-size: 1.4rem;
-        color: var(--emerald);
-        margin-bottom: 0.5rem;
-      }
-      .success-msg {
-        color: var(--gray);
-        font-size: 0.92rem;
-        line-height: 1.6;
-      }
-
-      /* ── FOOTER ── */
-      footer {
-        background: var(--emerald);
-        color: rgba(255, 255, 255, 0.7);
-        text-align: center;
-        padding: 1.5rem 2rem;
-        font-size: 0.82rem;
-        margin-top: 2rem;
-      }
-      footer a {
-        color: var(--gold-light);
+        transition: all 0.2s;
         text-decoration: none;
       }
+      .card-btn:hover { background: var(--emerald-light); box-shadow: 0 4px 12px rgba(45,138,88,0.2); }
 
-      @media (max-width: 700px) {
-        .hero-text {
-          width: 100%;
-        }
+      .section-divider { border: none; border-top: 1px solid var(--gray-light); max-width: 1400px; margin: 0 auto; }
+
+      /* ── FLOATING CURRENCY CONVERTER ── */
+      #fx-widget {
+        position: fixed;
+        right: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 900;
+        width: 210px;
+        background: var(--white);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(26,92,58,0.15), 0 2px 8px rgba(0,0,0,0.08);
+        border: 1px solid var(--gray-light);
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+      }
+      #fx-widget:hover { box-shadow: 0 12px 40px rgba(26,92,58,0.2), 0 4px 12px rgba(0,0,0,0.1); }
+
+      .fx-header {
+        background: var(--emerald);
+        padding: 0.85rem 1rem 0.7rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .fx-header-icon { font-size: 1rem; }
+      .fx-header-title { font-size: 0.8rem; font-weight: 700; color: var(--white); letter-spacing: 0.02em; }
+
+      .fx-body { padding: 0.9rem 1rem 1rem; }
+
+      .fx-pair {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.65rem;
+      }
+      .fx-flag-label { font-size: 0.72rem; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; }
+
+      .fx-input-wrap { position: relative; margin-bottom: 0.5rem; }
+      .fx-currency-tag {
+        position: absolute;
+        left: 0.65rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--emerald);
+        pointer-events: none;
+      }
+      .fx-input {
+        width: 100%;
+        padding: 0.55rem 0.65rem 0.55rem 2.5rem;
+        border: 1.5px solid var(--gray-light);
+        border-radius: 9px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--ink);
+        background: var(--mist);
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .fx-input:focus { outline: none; border-color: var(--emerald); background: var(--white); }
+      .fx-input[readonly] {
+        background: var(--emerald-pale);
+        border-color: transparent;
+        color: var(--emerald);
+        cursor: default;
+      }
+
+      .fx-arrow {
+        text-align: center;
+        font-size: 1rem;
+        color: var(--emerald);
+        margin: 0.3rem 0;
+        opacity: 0.6;
+      }
+
+      .fx-rate-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 0.6rem;
+        border-top: 1px solid var(--gray-light);
+        margin-top: 0.4rem;
+      }
+      .fx-rate-label { font-size: 0.7rem; color: var(--gray); font-weight: 500; }
+      .fx-rate-value { font-size: 0.78rem; font-weight: 800; color: var(--emerald); }
+      .fx-updated { font-size: 0.65rem; color: var(--gray); margin-top: 0.4rem; text-align: right; opacity: 0.8; }
+      .fx-dot {
+        display: inline-block;
+        width: 6px; height: 6px;
+        background: #10b981;
+        border-radius: 50%;
+        margin-right: 4px;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+
+      /* MODAL */
+      .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(17,24,39,0.8); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
+      .modal-overlay.active { display: flex; }
+      .modal { background: var(--white); border-radius: 24px; width: 100%; max-width: 500px; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; animation: modalShow 0.4s cubic-bezier(0.16,1,0.3,1); }
+      @keyframes modalShow { from { opacity:0; transform: scale(0.95) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
+      .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: var(--mist); border: none; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; color: var(--gray); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+      .modal-close:hover { background: #dc2626; color: var(--white); }
+      .modal-title { font-size: 1.75rem; color: var(--ink); font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+      .modal-exam-tag { display: inline-block; background: var(--emerald-pale); color: var(--emerald); font-size: 0.85rem; font-weight: 700; padding: 6px 14px; border-radius: 8px; margin-bottom: 2rem; }
+      .form-grid { display: grid; gap: 1.25rem; }
+      .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+      .form-label { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+      .form-input { padding: 0.85rem 1rem; border: 1.5px solid var(--gray-light); border-radius: 10px; font-family: inherit; font-size: 1rem; color: var(--ink); transition: all 0.2s; background: var(--white); }
+      .form-input:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 4px var(--emerald-pale); }
+      .form-submit { background: var(--emerald); color: var(--white); font-size: 1rem; font-weight: 700; padding: 1rem; border-radius: 12px; border: none; cursor: pointer; width: 100%; margin-top: 0.5rem; transition: all 0.2s; }
+      .form-submit:hover { background: var(--emerald-light); }
+      .success-state { text-align: center; padding: 1rem 0; }
+      .success-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+      .success-title { font-size: 1.75rem; color: var(--emerald); font-weight: 800; margin-bottom: 1rem; }
+
+      /* SVG arrow icon */
+      .link-arrow { display: inline-block; }
+
+      @media (max-width: 900px) {
+        .voucher-grid { grid-template-columns: repeat(2, 1fr); }
+        .voucher-grid.single-centered .voucher-card { grid-column: auto; }
+        #fx-widget { width: 185px; right: 0.75rem; }
+      }
+      @media (max-width: 600px) {
+        .section { padding: 3rem 3%; }
+        .section-title { font-size: 1.75rem; }
+        .voucher-grid { grid-template-columns: 1fr; }
+        .voucher-grid.single-centered .voucher-card { grid-column: auto; }
+        .modal { padding: 1.5rem; }
+        #fx-widget { display: none; }
       }
     </style>
   </head>
   <body>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <span class="hero-eyebrow">🇮🇪 Official Exam Partner</span>
-          <h1 class="hero-title">
-            Unlock Savings on<br /><em>PTE, GRE, TOEFL</em><br />& DUOLINGO
-          </h1>
-          <ul class="hero-checks">
-            <li>Reduced Exam Costs</li>
-            <li>100% Verified Voucher Partners</li>
-            <li>Dedicated Support & Resolution</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <!-- VOUCHERS SECTION -->
+    <!-- ── FLOATING CURRENCY CONVERTER ── -->
+    <div id="fx-widget">
+      <div class="fx-header">
+        <span class="fx-header-icon">💱</span>
+        <span class="fx-header-title">USD → NPR</span>
+      </div>
+      <div class="fx-body">
+        <div class="fx-input-wrap">
+          <span class="fx-currency-tag">USD</span>
+          <input class="fx-input" id="fxUsd" type="number" value="1" min="0" step="1" />
+        </div>
+        <div class="fx-arrow">↓</div>
+        <div class="fx-input-wrap">
+          <span class="fx-currency-tag">NPR</span>
+          <input class="fx-input" id="fxNpr" type="text" readonly />
+        </div>
+        <div class="fx-rate-row">
+          <span class="fx-rate-label">1 USD =</span>
+          <span class="fx-rate-value" id="fxRateDisplay">—</span>
+        </div>
+        <div class="fx-updated"><span class="fx-dot"></span><span id="fxUpdated">fetching…</span></div>
+      </div>
+    </div>
+
     <section class="section" id="vouchers">
       <div class="section-header">
-        <p class="section-sub">Book Exam at Unbeatable Prices</p>
-        <h2 class="section-title">Discounted Exam Vouchers</h2>
+        <h2 class="section-title">Schedule Your Assessment and Start Your Journey</h2>
       </div>
 
       <div class="voucher-grid">
+
+        <!-- PTE -->
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img duolingo">D</div>
-            <div>
-              <p class="card-name">Duolingo English Test Coupon Code</p>
-              <p class="card-type">Duolingo · Digital Voucher</p>
-            </div>
-            <span class="discount-badge">21%</span>
+            <p class="card-name">PTE Academic</p>
+            <p class="card-desc-top">Computer-based English proficiency test for study and migration in Australia, UK, New Zealand, and Canada.</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 8,600</span>
-              <span class="price-gst">(Incl. Tax)</span>
-            </div>
-            <p class="price-our">Our price: <strong>NPR 6,799</strong></p>
-            <p class="price-save">Save: NPR 1,801</p>
-            <button
-              class="card-btn"
-              onclick="openModal('Duolingo English Test Coupon Code')"
-            >
-              Buy Now
-            </button>
+            <p class="price-single">USD 205</p>
+            <p class="price-note">Official Pearson exam fee</p>
+            <div class="card-spacer"></div>
+            <a class="official-link" href="https://www.pearsonpte.com" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              pearsonpte.com
+            </a>
+            <button class="card-btn" onclick="openModal('PTE Academic')">Enquire Now</button>
           </div>
         </div>
 
+        <!-- Duolingo -->
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img gre">GRE</div>
-            <div>
-              <p class="card-name">GRE Voucher</p>
-              <p class="card-type">ETS · Official Voucher</p>
-            </div>
-            <span class="discount-badge">7%</span>
+            <p class="card-name">Duolingo English Test</p>
+            <p class="card-desc-top">Convenient online English exam — no appointment needed. Take anytime, anywhere. Results in 48 hours.</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 31,300</span>
-              <span class="price-gst">(Incl. Tax)</span>
+            <table class="price-table">
+              <tr>
+                <td>1 Test</td>
+                <td>USD 70</td>
+              </tr>
+              <tr>
+                <td>2 Tests Bundle</td>
+                <td>USD 118</td>
+              </tr>
+            </table>
+            <div class="code-badge">
+              <span class="code-badge-label">Coupon Code</span>
+              <span class="code-badge-sep">·</span>
+              <span class="code-badge-value">IJQ7GHV3</span>
             </div>
-            <p class="price-our">Our price: <strong>NPR 28,950</strong></p>
-            <p class="price-save">Save: NPR 2,350</p>
-            <button class="card-btn" onclick="openModal('GRE Voucher')">
-              Buy Now
-            </button>
+            <a class="official-link" href="https://englishtest.duolingo.com" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              englishtest.duolingo.com
+            </a>
+            <button class="card-btn" onclick="openModal('Duolingo English Test')">Enquire Now</button>
           </div>
         </div>
 
+        <!-- IELTS -->
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img toefl">TOEFL</div>
-            <div>
-              <p class="card-name">TOEFL Exam Voucher</p>
-              <p class="card-type">ETS · Official Voucher</p>
-            </div>
-            <span class="discount-badge">20%</span>
+            <p class="card-name">IELTS Exam</p>
+            <p class="card-desc-top">The world's most popular English proficiency test, accepted by over 12,000 organisations globally.</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 24,000</span>
-              <span class="price-gst">(Incl. Tax)</span>
-            </div>
-            <p class="price-our">Our price: <strong>NPR 19,199</strong></p>
-            <p class="price-save">Save: NPR 4,801</p>
-            <button class="card-btn" onclick="openModal('TOEFL Exam Voucher')">
-              Buy Now
-            </button>
+            <table class="price-table">
+              <tr>
+                <td>Computer-Based (Academic)</td>
+                <td>USD 215</td>
+              </tr>
+              <tr>
+                <td>Paper-Based (Academic)</td>
+                <td>USD 245</td>
+              </tr>
+            </table>
+            <div class="card-spacer"></div>
+            <a class="official-link" href="https://www.ielts.org" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              ielts.org
+            </a>
+            <button class="card-btn" onclick="openModal('IELTS Exam')">Enquire Now</button>
           </div>
         </div>
 
+        <!-- TOEFL -->
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img pte">PTE</div>
-            <div>
-              <p class="card-name">PTE Academic Voucher</p>
-              <p class="card-type">Pearson · Official Voucher</p>
-            </div>
-            <span class="discount-badge">13%</span>
+            <p class="card-name">TOEFL iBT Exam</p>
+            <p class="card-desc-top">Trusted English test for students and professionals preparing for university study, immigration, and global careers.</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 25,200</span>
-              <span class="price-gst">(Incl. Tax)</span>
+            <p class="price-single">USD 195</p>
+            <p class="price-note">Official ETS exam fee</p>
+            <div class="code-badge">
+              <span class="code-badge-label">Agent Code</span>
+              <span class="code-badge-sep">·</span>
+              <span class="code-badge-value">NPL1404101</span>
             </div>
-            <p class="price-our">Our price: <strong>NPR 21,899</strong></p>
-            <p class="price-save">Save: NPR 3,301</p>
-            <button
-              class="card-btn secondary"
-              onclick="openModal('PTE Academic Voucher')"
-            >
-              Quick View
-            </button>
+            <a class="official-link" href="https://www.ets.org/toefl" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              ets.org/toefl
+            </a>
+            <button class="card-btn" onclick="openModal('TOEFL iBT Exam')">Enquire Now</button>
           </div>
         </div>
 
+        <!-- GRE -->
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img pte">PTE</div>
-            <div>
-              <p class="card-name">PTE Core Voucher</p>
-              <p class="card-type">Pearson · Official Voucher</p>
-            </div>
-            <span class="discount-badge">11%</span>
+            <p class="card-name">GRE General Test</p>
+            <p class="card-desc-top">Critical skills assessment for thousands of graduate, business, and law programs worldwide.</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 25,200</span>
-              <span class="price-gst">(Incl. Tax)</span>
+            <p class="price-single">USD 220</p>
+            <p class="price-note">Official ETS exam fee</p>
+            <div class="code-badge">
+              <span class="code-badge-label">Agent Code</span>
+              <span class="code-badge-sep">·</span>
+              <span class="code-badge-value">NPL1404101</span>
             </div>
-            <p class="price-our">Our price: <strong>NPR 22,399</strong></p>
-            <p class="price-save">Save: NPR 2,801</p>
-            <button
-              class="card-btn secondary"
-              onclick="openModal('PTE Core Voucher')"
-            >
-              Quick View
-            </button>
+            <div class="card-spacer"></div>
+            <a class="official-link" href="https://www.ets.org/gre" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              ets.org/gre
+            </a>
+            <button class="card-btn" onclick="openModal('GRE General Test')">Enquire Now</button>
           </div>
         </div>
 
+        <!-- SAT -->
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img ielts">IELTS</div>
-            <div>
-              <p class="card-name">IELTS Exam Voucher</p>
-              <p class="card-type">British Council · Official</p>
-            </div>
-            <span class="discount-badge">10%</span>
+            <p class="card-name">SAT Exam</p>
+            <p class="card-desc-top">College Board's standardised college readiness exam, used by admissions offices worldwide alongside GPA and other factors.</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 22,700</span>
-              <span class="price-gst">(Incl. Tax)</span>
-            </div>
-            <p class="price-our">Our price: <strong>NPR 20,399</strong></p>
-            <p class="price-save">Save: NPR 2,301</p>
-            <button class="card-btn" onclick="openModal('IELTS Exam Voucher')">
-              Buy Now
-            </button>
+            <p class="price-single">USD 103</p>
+            <p class="price-note">Official College Board fee (int'l)</p>
+            <div class="card-spacer"></div>
+            <a class="official-link" href="https://satsuite.collegeboard.org/sat" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              collegeboard.org/sat
+            </a>
+            <button class="card-btn" onclick="openModal('SAT Exam')">Enquire Now</button>
           </div>
         </div>
+
+        <!-- Cambridge -->
+        <div class="voucher-card">
+          <div class="card-top">
+            <p class="card-name">Cambridge English</p>
+            <p class="card-desc-top">Globally recognised qualifications for real-life communication — accepted for study, work, and migration.</p>
+          </div>
+          <div class="card-body">
+            <table class="price-table">
+              <tr>
+                <td>B2 First (FCE)</td>
+                <td>USD 175</td>
+              </tr>
+              <tr>
+                <td>C1 Advanced (CAE)</td>
+                <td>USD 195</td>
+              </tr>
+              <tr>
+                <td>C2 Proficiency (CPE)</td>
+                <td>USD 210</td>
+              </tr>
+            </table>
+            <a class="official-link" href="https://www.cambridgeenglish.org" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              cambridgeenglish.org
+            </a>
+            <button class="card-btn" onclick="openModal('Cambridge English')">Enquire Now</button>
+          </div>
+        </div>
+
+        <!-- LanguageCert -->
+        <div class="voucher-card">
+          <div class="card-top">
+            <p class="card-name">LanguageCert</p>
+            <p class="card-desc-top">High-quality English exams by PeopleCert — approved for UK &amp; Australian visas, university admissions, and professional recognition.</p>
+          </div>
+          <div class="card-body">
+            <p class="card-desc">SELT, Academic &amp; General vouchers available. Contact us for current pricing for your specific exam level and format.</p>
+            <a class="official-link" href="https://www.languagecert.org/en" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              languagecert.org
+            </a>
+            <button class="card-btn" onclick="openModal('LanguageCert')">Enquire Now</button>
+          </div>
+        </div>
+
+        <!-- OET -->
+        <div class="voucher-card">
+          <div class="card-top">
+            <p class="card-name">OET Exam</p>
+            <p class="card-desc-top">The only English test designed exclusively for international healthcare professionals — recognised for visas, registration, and work.</p>
+          </div>
+          <div class="card-body">
+            <p class="price-single">AUD 587 <span style="font-size:0.8rem;font-weight:500;color:var(--gray)">/ USD 455</span></p>
+            <p class="price-note">Full test — all four sub-tests</p>
+            <div class="card-spacer"></div>
+            <a class="official-link" href="https://www.occupationalenglishtest.org" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              occupationalenglishtest.org
+            </a>
+            <button class="card-btn" onclick="openModal('OET Exam')">Enquire Now</button>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <hr class="section-divider" />
 
-    <!-- MOCK TEST SECTION -->
     <section class="section" id="mock">
       <div class="section-header">
-        <p class="section-sub">
-          Practice with the Official Pearson Practice Test
-        </p>
-        <h2 class="section-title">PTE Mock Test</h2>
+        <p class="section-sub">Prepare for Success</p>
+        <h2 class="section-title">Official PTE Mock Test</h2>
       </div>
 
-      <div class="voucher-grid">
+      <div class="voucher-grid single-centered">
         <div class="voucher-card">
           <div class="card-top">
-            <div class="card-img pte">PTE</div>
-            <div>
-              <p class="card-name">PTE Scored Practice Test – Variant 1</p>
-              <p class="card-type">Mock Test · Variant 1</p>
-            </div>
-            <span class="discount-badge">38%</span>
+            <p class="card-name">PTE Scored Mock Test</p>
+            <p class="card-desc-top">Official Pearson Practice Exam</p>
           </div>
           <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 3,020</span>
-              <span class="price-gst">(Incl. Tax)</span>
-            </div>
-            <p class="price-our">Our price: <strong>NPR 1,865</strong></p>
-            <p class="price-save">Save: NPR 1,155</p>
-            <button
-              class="card-btn"
-              onclick="openModal('PTE Scored Practice Test – Variant 1')"
-            >
-              Buy Now
-            </button>
-          </div>
-        </div>
-
-        <div class="voucher-card">
-          <div class="card-top">
-            <div class="card-img pte">PTE</div>
-            <div>
-              <p class="card-name">PTE Scored Practice Test – Variant 3</p>
-              <p class="card-type">Mock Test · Variant 3</p>
-            </div>
-            <span class="discount-badge">38%</span>
-          </div>
-          <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 3,020</span>
-              <span class="price-gst">(Incl. Tax)</span>
-            </div>
-            <p class="price-our">Our price: <strong>NPR 1,865</strong></p>
-            <p class="price-save">Save: NPR 1,155</p>
-            <button
-              class="card-btn"
-              onclick="openModal('PTE Scored Practice Test – Variant 3')"
-            >
-              Buy Now
-            </button>
-          </div>
-        </div>
-
-        <div class="voucher-card">
-          <div class="card-top">
-            <div class="card-img pte">PTE</div>
-            <div>
-              <p class="card-name">
-                PTE Scored Practice Test (Official Mock) – Variant 2
-              </p>
-              <p class="card-type">Mock Test · Official · Variant 2</p>
-            </div>
-            <span class="discount-badge">38%</span>
-          </div>
-          <div class="card-body">
-            <div class="card-prices">
-              <span class="price-mrp">NPR 3,020</span>
-              <span class="price-gst">(Incl. Tax)</span>
-            </div>
-            <p class="price-our">Our price: <strong>NPR 1,865</strong></p>
-            <p class="price-save">Save: NPR 1,155</p>
-            <button
-              class="card-btn"
-              onclick="
-                openModal(
-                  'PTE Scored Practice Test (Official Mock) – Variant 2',
-                )
-              "
-            >
-              Buy Now
-            </button>
+            <p class="card-desc">Simulate the real PTE Academic exam with an official Pearson scored mock test. Get detailed feedback on your performance across all four skills — Speaking, Writing, Reading, and Listening.</p>
+            <a class="official-link" href="https://www.pearsonpte.com/preparation/practice-tests" target="_blank" rel="noopener">
+              <svg class="link-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              pearsonpte.com
+            </a>
+            <button class="card-btn" onclick="openModal('PTE Scored Mock Test')">Enquire Now</button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- MODAL -->
-    <div
-      class="modal-overlay"
-      id="modalOverlay"
-      onclick="handleOverlayClick(event)"
-    >
+    <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
       <div class="modal" id="modal">
         <button class="modal-close" onclick="closeModal()">✕</button>
-
-        <!-- FORM STATE -->
         <div id="formState">
-          <p class="modal-eyebrow">🎓 StudyInIreland · Secure Booking</p>
-          <h2 class="modal-title">Complete Your Order</h2>
+          <h2 class="modal-title">Booking Enquiry</h2>
           <span class="modal-exam-tag" id="examTag"></span>
-
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label" for="examField">Selected Exam</label>
-              <input
-                class="form-input readonly"
-                id="examField"
-                type="text"
-                readonly
-              />
+              <label class="form-label">Full Name *</label>
+              <input class="form-input" id="nameField" type="text" placeholder="Your full name" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="nameField">Full Name *</label>
-              <input
-                class="form-input"
-                id="nameField"
-                type="text"
-                placeholder="e.g. Riya Sharma"
-                required
-              />
+              <label class="form-label">Email Address *</label>
+              <input class="form-input" id="emailField" type="email" placeholder="email@example.com" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="emailField">Email Address *</label>
-              <input
-                class="form-input"
-                id="emailField"
-                type="email"
-                placeholder="you@example.com"
-                required
-              />
+              <label class="form-label">Phone Number *</label>
+              <input class="form-input" id="phoneField" type="tel" placeholder="+977 98XXXXXXXX" required />
             </div>
-            <div class="form-group">
-              <label class="form-label" for="phoneField">Phone Number *</label>
-              <input
-                class="form-input"
-                id="phoneField"
-                type="tel"
-                placeholder="+977 98XXXXXXXX"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="addressField">Address *</label>
-              <input
-                class="form-input"
-                id="addressField"
-                type="text"
-                placeholder="Street, City, Country"
-                required
-              />
-            </div>
-            <button class="form-submit" onclick="submitForm()">
-              Confirm & Request Voucher →
-            </button>
+            <button class="form-submit" onclick="submitForm()">Submit Request</button>
           </div>
         </div>
-
-        <!-- SUCCESS STATE -->
         <div id="successState" style="display: none">
           <div class="success-state">
-            <div class="success-icon">🎉</div>
-            <h2 class="success-title">Order Submitted!</h2>
-            <p class="success-msg">
-              Thank you! Our team will reach out to you within
-              <strong>24 hours</strong> with your voucher details and payment
-              instructions.
-            </p>
-            <br />
-            <p class="success-msg" style="font-size: 0.82rem; color: #9ca3af">
-              Exam:
-              <span
-                id="successExamName"
-                style="color: var(--emerald); font-weight: 700"
-              ></span>
-            </p>
-            <br />
-            <button
-              class="card-btn"
-              style="max-width: 200px; margin: 0 auto"
-              onclick="closeModal()"
-            >
-              Close
-            </button>
+            <div class="success-icon">✅</div>
+            <h2 class="success-title">Thank You!</h2>
+            <p style="color: var(--gray)">Our team will reach out with details for <strong id="successExamName"></strong> shortly.</p>
+            <button class="card-btn" style="max-width: 140px; margin: 2rem auto 0;" onclick="closeModal()">Close</button>
           </div>
         </div>
       </div>
     </div>
 
     <script>
+      /* ── MODAL ── */
       function openModal(examName) {
-        document.getElementById("examField").value = examName;
         document.getElementById("examTag").textContent = examName;
         document.getElementById("formState").style.display = "block";
         document.getElementById("successState").style.display = "none";
-        // Clear previous values
-        document.getElementById("nameField").value = "";
-        document.getElementById("emailField").value = "";
-        document.getElementById("phoneField").value = "";
-        document.getElementById("addressField").value = "";
         document.getElementById("modalOverlay").classList.add("active");
         document.body.style.overflow = "hidden";
       }
-
       function closeModal() {
         document.getElementById("modalOverlay").classList.remove("active");
         document.body.style.overflow = "";
       }
-
-      function handleOverlayClick(e) {
-        if (e.target === document.getElementById("modalOverlay")) closeModal();
-      }
-
+      function handleOverlayClick(e) { if (e.target.id === "modalOverlay") closeModal(); }
       function submitForm() {
         const name = document.getElementById("nameField").value.trim();
-        const email = document.getElementById("emailField").value.trim();
-        const phone = document.getElementById("phoneField").value.trim();
-        const address = document.getElementById("addressField").value.trim();
-        const exam = document.getElementById("examField").value;
-
-        if (!name || !email || !phone || !address) {
-          alert("Please fill in all required fields.");
-          return;
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          alert("Please enter a valid email address.");
-          return;
-        }
-
-        // Show success
-        document.getElementById("successExamName").textContent = exam;
+        if (!name) { alert("Please fill in your name."); return; }
+        document.getElementById("successExamName").textContent = document.getElementById("examTag").textContent;
         document.getElementById("formState").style.display = "none";
         document.getElementById("successState").style.display = "block";
       }
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-      });
+      /* ── CURRENCY CONVERTER ── */
+      let currentRate = null;
+
+      async function fetchRate() {
+        try {
+          // Use open exchange rates API (no key needed for USD base)
+          const res = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+          const data = await res.json();
+          currentRate = data.rates.NPR;
+          updateDisplay();
+          document.getElementById("fxUpdated").textContent = "Live rate";
+        } catch (e) {
+          // Fallback to a recent known rate if API fails
+          try {
+            const res2 = await fetch("https://open.er-api.com/v6/latest/USD");
+            const data2 = await res2.json();
+            currentRate = data2.rates.NPR;
+            updateDisplay();
+            document.getElementById("fxUpdated").textContent = "Live rate";
+          } catch (e2) {
+            currentRate = 135.5; // fallback static
+            updateDisplay();
+            document.getElementById("fxUpdated").textContent = "Indicative rate";
+          }
+        }
+      }
+
+      function updateDisplay() {
+        if (!currentRate) return;
+        const usdVal = parseFloat(document.getElementById("fxUsd").value) || 0;
+        const nprVal = (usdVal * currentRate).toLocaleString("en-NP", { maximumFractionDigits: 0 });
+        document.getElementById("fxNpr").value = nprVal;
+        document.getElementById("fxRateDisplay").textContent = currentRate.toLocaleString("en", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " NPR";
+      }
+
+      document.getElementById("fxUsd").addEventListener("input", updateDisplay);
+
+      fetchRate();
+      // Refresh every 5 minutes
+      setInterval(fetchRate, 5 * 60 * 1000);
     </script>
   </body>
 </html>
